@@ -1,0 +1,20 @@
+# Dados, binários grandes e material não destinado ao repositório público.
+# Este repositório versiona apenas código e documentação metodológica.
+*
+!.gitignore
+!*.py
+!*.md
+!*.docx
+!*.pptx
+!Executar.bat
+!Instalar dependências.bat
+!LEIA-ME.txt
+
+# Excluídos por poderem conter casos identificáveis de contribuintes ou
+# transcrições internas de reunião — não vão para o repositório público.
+Relatorio_Cadastro_vs_Transmissoes_ITIV.docx
+Exemplos_Duplicatas_Aprovacao.docx
+Relatorio_Defasagem_Valor_Venal_Salvador_Jun2026.docx
+2026-06-09 12-02-58.txt
+reuniao_cif_drm.txt
+Apresentação ITIV - Modelo de Avaliação de Imóveis.pptx

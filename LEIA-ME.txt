@@ -1,0 +1,163 @@
+================================================================================
+  TranscritorAI - Transcrição local de áudio e vídeo com Whisper
+================================================================================
+
+O TranscritorAI transcreve arquivos de áudio e vídeo no seu computador,
+sem enviar dados para a internet (após a instalação e o download do modelo).
+
+
+--------------------------------------------------------------------------------
+  O QUE VOCÊ PRECISA TER INSTALADO
+--------------------------------------------------------------------------------
+
+1. Windows 10 ou 11
+
+2. Python 3.11, 3.12 ou 3.13
+   Download: https://www.python.org/downloads/
+   IMPORTANTE: na instalação, marque a opção "Add Python to PATH"
+
+3. FFmpeg (obrigatório para transcrever vídeos)
+   Download: https://www.gyan.dev/ffmpeg/builds/
+   - Baixe a versão "release full"
+   - Extraia o arquivo ZIP
+   - Copie a pasta "bin" para um local fixo (ex.: C:\ffmpeg\bin)
+   - Adicione essa pasta ao PATH do Windows:
+     Painel de Controle > Sistema > Configurações avançadas > Variáveis de ambiente
+     > Path > Editar > Novo > cole o caminho da pasta bin
+
+4. Conexão com a internet (apenas na primeira instalação e no primeiro uso
+   de cada modelo Whisper, para baixar os arquivos necessários)
+
+
+--------------------------------------------------------------------------------
+  ESTRUTURA DO PACOTE
+--------------------------------------------------------------------------------
+
+TranscritorAI/
+├── LEIA-ME.txt                  (este arquivo)
+├── Instalar dependências.bat    (execute uma vez)
+├── Executar.bat                 (abre o aplicativo)
+└── transcritor/
+    ├── main.py
+    ├── ui.py
+    ├── transcriber.py
+    ├── utils.py
+    └── requirements.txt
+
+
+--------------------------------------------------------------------------------
+  INSTALAÇÃO (FAZER UMA VEZ)
+--------------------------------------------------------------------------------
+
+1. Descompacte o arquivo ZIP em uma pasta de sua preferência
+   (ex.: C:\TranscritorAI)
+
+2. Clique duas vezes em "Instalar dependências.bat"
+
+3. Aguarde a instalação terminar (pode levar de 5 a 20 minutos,
+   dependendo da velocidade da internet)
+
+4. Quando aparecer "Instalação concluída com sucesso!", pressione uma tecla
+   para fechar a janela
+
+
+--------------------------------------------------------------------------------
+  COMO USAR
+--------------------------------------------------------------------------------
+
+1. Clique duas vezes em "Executar.bat"
+
+2. Selecione um arquivo de duas formas:
+   - Arraste e solte o arquivo na área indicada, ou
+   - Clique em "Selecionar arquivo"
+
+3. Formatos suportados:
+   Vídeo: mp4, mkv, avi, mov
+   Áudio: mp3, wav, m4a, ogg, flac
+
+4. Escolha as opções:
+   - Modelo Whisper: tiny, base, small, medium, large
+   - Idioma: Português, Inglês ou Automático
+   - Formato de saída: TXT, SRT, VTT ou todos
+
+5. Clique em "Transcrever" e aguarde
+
+6. Ao concluir:
+   - O texto aparece na tela (pode ser editado)
+   - Os arquivos são salvos na mesma pasta do arquivo original
+   - Uma notificação do Windows confirma a conclusão
+
+7. Botões úteis:
+   - Copiar texto: copia a transcrição para a área de transferência
+   - Salvar como...: salva o texto em outro local ou formato
+   - Abrir pasta de saída: abre a pasta onde os arquivos foram salvos
+
+
+--------------------------------------------------------------------------------
+  ESCOLHA DO MODELO WHISPER
+--------------------------------------------------------------------------------
+
+Modelo    | Qualidade | Velocidade  | Uso recomendado
+----------|-----------|-------------|----------------------------------
+tiny      | Básica    | Muito rápida| Testes rápidos
+base      | Boa       | Rápida      | Uso geral leve
+small     | Muito boa | Moderada    | Melhor custo-benefício
+medium    | Excelente | Lenta       | Alta qualidade (demora bastante)
+large     | Máxima    | Muito lenta | Apenas se tiver tempo e boa máquina
+
+Dica: comece com "base" ou "small". O modelo "medium" pode levar horas
+em arquivos longos, especialmente sem placa de vídeo NVIDIA.
+
+
+--------------------------------------------------------------------------------
+  ONDE FICAM OS ARQUIVOS GERADOS
+--------------------------------------------------------------------------------
+
+Por padrão, os arquivos de saída são salvos na mesma pasta do arquivo
+original, com o mesmo nome:
+
+  meu_video.mp4  ->  meu_video.txt
+                    meu_video.srt  (se escolheu SRT ou "todos")
+                    meu_video.vtt  (se escolheu VTT ou "todos")
+
+
+--------------------------------------------------------------------------------
+  PROBLEMAS COMUNS
+--------------------------------------------------------------------------------
+
+"Python não encontrado no PATH"
+  -> Reinstale o Python marcando "Add Python to PATH"
+
+"Ambiente virtual não encontrado"
+  -> Execute primeiro "Instalar dependências.bat"
+
+"FFmpeg não encontrado"
+  -> Instale o FFmpeg e adicione a pasta bin ao PATH do Windows
+
+"Memória insuficiente"
+  -> Use um modelo menor (tiny ou base) e feche outros programas
+
+"Arquivo corrompido ou formato não suportado"
+  -> Verifique se o arquivo abre normalmente em um player de mídia
+
+Arrastar e soltar não funciona
+  -> Use o botão "Selecionar arquivo" (funciona da mesma forma)
+
+Transcrição muito lenta
+  -> Normal com modelos medium e large. Use "small" ou "base" para ir mais rápido
+
+
+--------------------------------------------------------------------------------
+  OBSERVAÇÕES
+--------------------------------------------------------------------------------
+
+- O aplicativo funciona offline após a instalação e o download do modelo
+- O modelo Whisper é carregado uma vez por sessão e reutilizado
+- Vídeos são convertidos para áudio automaticamente antes da transcrição
+- Não é necessário enviar os arquivos neste pacote:
+    venv/, __pycache__/ ou transcrições já geradas (.txt, .srt, .vtt)
+
+
+================================================================================
+  TranscritorAI - Uso local e privado
+================================================================================
