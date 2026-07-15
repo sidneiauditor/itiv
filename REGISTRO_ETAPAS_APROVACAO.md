@@ -308,6 +308,56 @@ causal (sem vazamento).
 
 ### Etapa 4 (treino) — ⏳ liberada após aprovação da lista + decisões da Etapa 2/3
 
-## Etapa 4 — Treino do modelo refeito (apartamentos)  ⏳ pendente
+## Etapa 4 — Treino do modelo refeito (apartamentos)  ✅ concluída (14/07/2026)
 
-## Etapa 5 — Validação normativa completa  ⏳ pendente
+Executada em 09/07/2026 e re-executada em 14/07/2026 com as duas decisões da
+equipe de 14/07/2026:
+- **Filtro de plausibilidade** (substitui o corte de vendas simbólicas):
+  Compra e Venda exato + Apartamento + VLITIV > 0 + desvio venal × transação ≤ ±30%.
+  Motivo: restabelecer a leitura de PRD/PRB. Base: 97.990 → 46.392 transações.
+- **Nível de confiança de 90%** para a sinalização (D5): 1.596 sinalizados
+  (17,2% do teste final).
+
+GridSearch ampliado para 5 famílias de modelos (LightGBM venceu; ElasticNet,
+RF, Extra Trees e HistGB documentados em metricas_cv_apartamentos.json).
+
+**Resultado no holdout:** LightGBM razão 0,999 | COD 9,6% | PRD 1,017 |
+PRB −0,0088 — **todas as metas IAAO atendidas**. Hedônico como âncora (D6).
+Relatório: `Relatorio_Etapa4_Treino_Modelo_Apartamentos_20260714.docx`
+
+**Aprovação da equipe (D4 — aprovação formal do modelo):** (X) Aprovado em 14/07/2026
+
+## Etapa 5 — Validação normativa completa  ✅ executada e aprovada (14/07/2026)
+
+Relatório: `Relatorio_Etapa5_Validacao_Normativa_20260714.docx`
+Scripts: `etapa5_validacao_normativa.py` (+ gráficos e relatório).
+
+**Enquadramento:** hedônico com **Grau II de fundamentação** (15 pontos,
+NBR 14653-2 Tabelas 1/2, com item 5 fundamentado pela análise da variância
+por partes, A.3.2) e **Grau III de precisão** (amplitude mediana do IC 80% =
+2,05%). LightGBM validado conforme IBAPE/SOBREA 2023 (8.1.2 — ML não é
+objeto de especificação; exige justificativa + validação, ambas documentadas).
+
+**Razões por segmento (IAAO, teste final):** razão mediana dentro de
+0,90–1,10 nos 10 decis de valor e nos 70 setores com n≥10; COD ≤ 15% em
+todos os decis e em 63/70 setores.
+
+**Comparação com o valor venal atual (com ressalva metodológica do filtro
+±30%):** venal razão 0,851 (subavaliação) vs LightGBM 0,999.
+
+### Decisões da equipe (Etapa 5) — resolvidas em 14/07/2026
+1. **Agrupamento de setores:** aplicado 177→175 e 179→162 (critério: distância
+   ≤ 1km E diferença de preço/m² ≤ 20% vs. vizinho com n≥10). Os demais 14
+   setores com poucos dados não atenderam ao critério (preço muito diferente
+   do vizinho mais próximo — divisa entre bairros distintos) e permanecem
+   sem agrupamento forçado. Hedônico mantido em Grau II (item 5 sustentado
+   pela análise da variância por partes).
+2. **Pontos com Cook > 1:** eram 4, todas transações em setores com 1 único
+   dado no treino (causa estatística, não erro de dado — decisão da equipe:
+   não remover). O agrupamento 177→175 já resolveu 1 caso; restam 3
+   (setores 122, 166, 172, ainda isolados).
+3. **Pendente:** administração informar itens 1–3 da Tabela 1 IBAPE
+   (cadastro/OMI) — não depende do modelo; item institucional, não bloqueia
+   a aprovação do modelo.
+
+**Aprovação da equipe:** (X) Aprovado em 14/07/2026

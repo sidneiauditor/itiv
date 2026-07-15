@@ -27,15 +27,19 @@ SAIDA = PASTA / "manifesto_treino.json"
 
 ARQUIVOS_DADOS = [
     PASTA / "base_limpa_normas.parquet",
-    PASTA / "amostras" / "treino.parquet",
-    PASTA / "amostras" / "validacao.parquet",
-    PASTA / "amostras" / "teste.parquet",
+    PASTA / "amostras" / "pool_treino.parquet",
+    PASTA / "amostras" / "teste_final.parquet",
+    PASTA / "amostras" / "pool_treino_parametros.parquet",
+    PASTA / "amostras" / "teste_final_parametros.parquet",
+    PASTA / "amostras" / "teste_final_previsoes.parquet",
+    PASTA / "modelo_lightgbm_apartamentos.txt",
 ]
 SCRIPTS_PIPELINE = [
     PASTA / "construir_base_limpa.py",
-    PASTA / "etapa1_dividir_amostra.py",
-    PASTA / "validar_consistencia.py",
-    PASTA / "etapa3_comparar_outliers.py",
+    PASTA / "preparar_base_treino.py",
+    PASTA / "engenharia_parametros_treino.py",
+    PASTA / "saneamento_chauvenet_iterativo.py",
+    PASTA / "treinar_modelo_apartamentos.py",
     PASTA / "verificacoes_pre_treino.py",
 ]
 
@@ -69,15 +73,16 @@ for arq in ARQUIVOS_DADOS:
         print(f"  [AUSENTE] {arq.name}")
         manifesto["dados"][arq.name] = {"erro": "arquivo ausente"}
         continue
-    df = pd.read_parquet(arq)
-    info = {
-        "sha256": sha256_arquivo(arq),
-        "bytes": arq.stat().st_size,
-        "linhas": len(df),
-        "colunas": len(df.columns),
-    }
+    info = {"sha256": sha256_arquivo(arq), "bytes": arq.stat().st_size}
+    if arq.suffix == ".parquet":
+        df = pd.read_parquet(arq)
+        info["linhas"] = len(df)
+        info["colunas"] = len(df.columns)
+        resumo = f"{info['linhas']:>8,} linhas"
+    else:
+        resumo = f"{info['bytes']:>8,} bytes"
     manifesto["dados"][str(arq.relative_to(PASTA))] = info
-    print(f"  {str(arq.relative_to(PASTA)):32s} {info['linhas']:>8,} linhas  {info['sha256'][:16]}...")
+    print(f"  {str(arq.relative_to(PASTA)):32s} {resumo}  {info['sha256'][:16]}...")
 
 for arq in SCRIPTS_PIPELINE:
     if not arq.exists():
