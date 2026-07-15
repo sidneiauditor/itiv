@@ -3,6 +3,7 @@
 *
 !.gitignore
 !*.py
+!*.js
 !*.md
 !*.docx
 !*.pptx
