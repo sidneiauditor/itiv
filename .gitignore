@@ -1,15 +1,20 @@
 # Dados, binários grandes e material não destinado ao repositório público.
 # Este repositório versiona apenas código e documentação metodológica.
 *
-!.gitignore
-!*.py
-!*.js
-!*.md
-!*.docx
-!*.pptx
-!Executar.bat
-!Instalar dependências.bat
+!*/
+!**/*.py
+!**/*.js
+!**/*.md
+!**/*.docx
+!**/*.pptx
+!**/*.bat
 !LEIA-ME.txt
+
+# Ambientes e caches locais
+**/venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.git/
 
 # Excluídos por poderem conter casos identificáveis de contribuintes ou
 # transcrições internas de reunião — não vão para o repositório público.
