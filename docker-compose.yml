@@ -8,7 +8,7 @@ services:
     volumes:
       - itiv_pg:/var/lib/postgresql/data
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      - "${POSTGRES_PORT:-8085}:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-itiv} -d ${POSTGRES_DB:-itiv}"]
       interval: 5s
@@ -18,7 +18,7 @@ services:
   web:
     build: .
     ports:
-      - "${ITIV_PORTA:-8766}:8766"
+      - "${ITIV_PORTA:-8084}:8766"
     environment:
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-itiv}:${POSTGRES_PASSWORD:-itiv}@db:5432/${POSTGRES_DB:-itiv}
       GOOGLE_SV_KEY: ${GOOGLE_SV_KEY:-}
@@ -46,3 +46,9 @@ services:
 
 volumes:
   itiv_pg:
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24
