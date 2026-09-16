@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Avaliador ITIV — Apartamentos (idade + inscrição relativa)</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header><h1>Avaliador ITIV — Apartamentos (idade + inscrição relativa, 26/08/2026)</h1></header>
+<main>
+  <div class="abas">
+    <a class="aba {{ ativa_tx }}" href="/avaliar">Transmissao (ITIV)</a>
+    <a class="aba {{ ativa_cad }}" href="/cadastro">Cadastro (Valor Venal)</a>
+  </div>
+  <div class="painel-busca">
+    <form action="{{ action }}" method="get">
+      <input type="text" name="q" placeholder="{{ placeholder }}" value="{{ q }}" autofocus>
+      <button type="submit">Avaliar</button>
+    </form>
+  </div>
+  {{ conteudo | safe }}
+</main>
+</body>
+</html>

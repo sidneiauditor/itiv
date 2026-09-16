@@ -1,0 +1,45 @@
+body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f4f6f8; }
+header { background: #1a3a5c; color: white; padding: 16px 32px; }
+header h1 { margin: 0; font-size: 1.3em; }
+main { max-width: 1000px; margin: 24px auto; padding: 0 16px; }
+.abas { display: flex; gap: 0; margin-bottom: 0; border-bottom: 2px solid #1a3a5c; }
+.aba { padding: 10px 28px; font-size: 1em; background: #e8eef4; border: 1px solid #bbb;
+  border-bottom: none; cursor: pointer; text-decoration: none; color: #333; border-radius: 6px 6px 0 0; }
+.aba.ativa { background: #1a3a5c; color: white; font-weight: bold; }
+.painel-busca { background: white; border: 1px solid #bbb; border-top: none;
+  padding: 16px; border-radius: 0 0 8px 8px; margin-bottom: 24px; }
+.painel-busca form { display: flex; gap: 8px; }
+input[type=text] { flex: 1; padding: 12px; font-size: 1.1em; border: 1px solid #bbb; border-radius: 6px; }
+button { padding: 12px 28px; font-size: 1.1em; background: #1a3a5c; color: white;
+  border: 0; border-radius: 6px; cursor: pointer; }
+table { border-collapse: collapse; width: 100%; background: white; font-size: 0.92em; margin: 8px 0 16px; }
+th, td { border: 1px solid #ddd; padding: 7px 10px; text-align: left; }
+th { background: #e8eef4; }
+.info th { width: 130px; background: #f0f3f6; }
+.cards { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0; }
+.card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 14px 18px; min-width: 190px; }
+.card.destaque { border: 2px solid #1a3a5c; }
+.rotulo { color: #666; font-size: 0.85em; }
+.valor { font-size: 1.35em; font-weight: bold; color: #1a3a5c; }
+.sub { color: #888; font-size: 0.8em; margin-top: 4px; }
+.pilha { color: white; padding: 4px 14px; border-radius: 12px; font-weight: bold; }
+.erro { background: #ffebee; border-left: 4px solid #c62828; padding: 12px; }
+.aviso { background: #fff8e1; border-left: 4px solid #ffa000; padding: 10px; }
+.nota { color: #777; font-size: 0.85em; border-top: 1px solid #ddd; padding-top: 12px; margin-top: 24px; }
+.metodologia { color: #666; font-size: 0.82em; font-style: italic; }
+h2 { color: #1a3a5c; margin-top: 28px; }
+h3 { color: #2c5f8a; }
+.acoes { display: flex; gap: 10px; margin: 16px 0; }
+.acoes button, .acoes a { padding: 10px 22px; font-size: 1em; border: 0; border-radius: 6px;
+  cursor: pointer; text-decoration: none; display: inline-block; }
+.btn-pdf { background: #2e7d32; color: white; }
+.btn-mail { background: #1565c0; color: white; }
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .acoes, .abas, .painel-busca, header, #mapa { display: none !important; }
+  body { background: white; }
+  main { max-width: 100%; margin: 0; }
+  .card { break-inside: avoid; }
+  table { font-size: 0.8em; }
+  @page { margin: 1.5cm; }
+}

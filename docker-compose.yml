@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-itiv}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-itiv}
+      POSTGRES_DB: ${POSTGRES_DB:-itiv}
+    volumes:
+      - itiv_pg:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-itiv} -d ${POSTGRES_DB:-itiv}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  web:
+    build: .
+    ports:
+      - "${ITIV_PORTA:-8766}:8766"
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-itiv}:${POSTGRES_PASSWORD:-itiv}@db:5432/${POSTGRES_DB:-itiv}
+      GOOGLE_SV_KEY: ${GOOGLE_SV_KEY:-}
+      MODELO_DIR: /dados/modelo
+      ITIV_DADOS_DIR: /dados/importacao
+      ITIV_PORTA: "8766"
+    volumes:
+      - ./dados_modelo:/dados/modelo
+      - ./dados_importacao:/dados/importacao
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8766/health')",
+        ]
+      interval: 15s
+      timeout: 10s
+      retries: 8
+      start_period: 40s
+
+volumes:
+  itiv_pg:

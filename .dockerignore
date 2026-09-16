@@ -1,0 +1,11 @@
+.git
+.cursor
+__pycache__
+*.pyc
+.env
+dados_importacao/**
+!dados_importacao/.gitkeep
+dados_modelo/**
+!dados_modelo/.gitkeep
+!dados_modelo/README.txt
+agent-transcripts
